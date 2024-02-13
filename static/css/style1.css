@@ -1,0 +1,16 @@
+.bg-nav{
+background: #333333;
+background: -webkit-linear-gradient(to right, #dd1818, #333333);
+background: linear-gradient(to right, #dd1818, #333333);
+
+}
+.logout   border: 2px;
+}
+
+.logout_btn:hover{
+    color: red;
+}_btn{
+    color: white;
+    margin-left: 850px;
+    border-radius: 10px;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>SignUp</title>
+        <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style_auth.css')}}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+<body>
+    <form id="form" action="/register_val" method="post">
+    <div class="container">
+        <div class="form signup">
+            <h2>Sign Up</h2>
+            <div class="inputBox">
+                <input type="text" minlength="3" id="username" name="username" required>
+                <i class="fa-solid fa-user"></i>
+                <span>username</span>
+            </div>
+            <div class="inputBox">
+                <input type="email" id="email" required>
+                <i class="fa-solid fa-envelope"></i>
+                <span>email address</span>
+            </div>
+            <div class="inputBox">
+                <input type="password" id="password" name="password" required minlength="8">
+                <i class="fa-solid fa-lock"></i>
+                <span>create password</span>
+            </div>
+            <div class="inputBox">
+                <input type="password" id="password_confirm" required minlength="8">
+                <i class="fa-solid fa-lock"></i>
+                <span>confirm password</span>
+            </div>
+            <div class="inputBox">
+                <input type="submit" value="Create Account" class="create_submit">
+            </div>
+            <p>Already has an account ? <a href="/" class="login">Log in</a></p>
+        </div>
+    </div>
+    </form>
+        <script type="text/javascript" src="{{url_for('static',filename='script/script.js')}}">
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>
+
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style_book.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/modal.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<script src="{{ url_for('static', filename='script/book.js') }}"></script>
+<script>
+
+    function sendComment(username,isbn){
+
+    var element = document.getElementById("heeee");
+    var comment = element.value;
+    console.log(username);
+    console.log(isbn);
+    console.log(comment);
+
+        let userComment = {
+            'isbn_no' : isbn,
+            'username' : username,
+            'comment' : comment
+    }
+
+
+    const request = new XMLHttpRequest()
+    request.open('POST', `/processUserComment/${JSON.stringify(userComment)}`)
+    request.onload = () =>{
+
+        const flaskMessage = request.responseText;
+        console.log(flaskMessage);
+
+         window.location.reload();
+
+    }
+
+    request.send()
+
+    }
+
+
+    function sendReview(username,isbn){
+
+    var review_title = document.getElementById("review_title").value;
+    var review_content = document.getElementById("review_content").value;
+
+        let userReview = {
+            'isbn_no' : isbn,
+            'username' : username,
+            'review_title' : review_title,
+            'review_content' : review_content
+    }
+
+
+    const request = new XMLHttpRequest()
+    request.open("POST","http://127.0.0.1:5000/processUserReview");
+    request.setRequestHeader('Content-Type','application/json');
+
+    request.onload = () =>{
+
+        const flaskMessage = request.responseText;
+        console.log(flaskMessage);
+        window.location.reload();
+
+
+    }
+
+    request.send(JSON.stringify(userReview))
+
+    }
+
+</script>
+</head>
+
+<body style="background-color: black;">
+      
+      <!-- Modal -->
+      <div   class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div  class="modal-dialog" role="document">
+          <div style="background-color:#1a1a1a;" class="modal-content">
+            <!-- <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div> -->
+            <div  class="text_color_white" style="display: flex;flex-direction: column; justify-content: center ; align-items: center;" class="modal-body">
+            <h4 > Rate this book</h4> 
+                <div style=" margin: 10px; display: flex; justify-content: center ; align-items: center;">
+                    {% for i in range(10) %}
+                   <img id='{{i}}' onmouseout="reset()" onclick="rate('{{i}}','{{username}}','{{isbn}}')" onmouseover="toggle('{{i}}')" height=30px; width=30px; src="{{url_for('static', filename='css/star.png')}}">
+                    {% endfor %}
+
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <nav class="navbar bg-nav">
+        <a class='navbar-brand' style="color:white;"> My Book Recommender</a>
+        <ul class="nav navbar-nav">
+            <li><a href="/home" style="color:grey;">Home</a></li>
+            <li><a href="/recommend" style="color:grey;">Recommend</a></li>
+            <li><a href="/all_books" style="color:grey;">Books</a></li>
+            <li><a href="/read_list" style="color:grey;">ReadList</a></li>
+            <li><a class="" href="">{{username}}</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div>
+        <div class="grid-container">
+
+            <div class="item-1">
+                <div class="box_container">
+                    <div class="card">
+                        <img class="card-img-top" src={{book_image}}>
+
+                    </div>
+                    <button class="download_button text_color_white">Download</button>
+
+                </div>
+            </div>
+
+            <div class="item-2">
+                <h2 class="text_color_white">{{book_name}}</h2>
+                <h3 class="text_color_white">{{book_author}}</h3>
+                <h3 class="text_color_white">Votes - {{book_votes}}</h3>
+                <h3 class="text_color_white">Rating - {{book_avg_rating}}</h3>
+                <div style="display: flex; justify-content: center ; align-items: center;">
+                    <img data-toggle="modal" data-target="#exampleModal"   height=70px; width=50px; src="{{url_for('static', filename='css/star.png')}}">
+                </div>
+            </div>
+            <div class="item-3">
+                <h4 style="color: white;">Simillar Books</h4>
+                <div style="width: 300px;height: 300px;" class="grid-3">
+
+                    {% if data %}
+                    {% for i in data %}
+
+                    <div class="card_rec" style="background-color: aqua;"><img class="card-img-top" src="{{i[2]}}"></div>
+
+                    {% endfor %}
+                    {% endif %}
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <br>
+
+    <div class="grid-comment-review">
+
+        <div class="comments">
+            <h4>Comments:</h4>
+
+            <div style="margin-left: 10%;margin-bottom: 10px;">
+
+                <input id="heeee" required class="comment_input" type="text" placeholder="comment now"
+                    style="height: 40px;border-radius: 5px; background-color: black; color: white; width: 70%;">
+                <button onclick="sendComment('{{username}}','{{isbn}}')" type="" style="background-color: green;height: 40px; border-radius: 5px;">Comment</button>
+            </div>
+
+            <div class="comments_container">
+                {% for i in range(comments|length) %}
+                <div class="comments_block">
+                    <h5 style="color: #919191; display: inline;">{{user_names[i]}}</h5>
+                    <p style="color: white;">{{comments[i]}}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="reviews">
+
+            <h4 style="color: white;margin-left: 10%;">Reviews:</h4>
+
+            <form onsubmit="sendReview('{{username}}','{{isbn}}')">
+                <div>
+                    <div style="margin-left: 10%;margin-bottom: 10px;">
+                        <label for message>Review Title:</label>
+                        <br>
+                        <textarea id="review_title" placeholder="Enter Review Title" cols="80" rows="1"
+                            style="background-color: #171717; color: white;" required></textarea>
+                        <br>
+                        <label for message>Review: &nbsp;</label>
+                        <br>
+                        <textarea id="review_content" placeholder="Share your review about the book" cols="80" rows="5"
+                            style="background-color: #171717; color: white;" required></textarea>
+                        <br>
+                        <button type="submit" style="background-color: green;height: 40px; border-radius: 5px;">Submit</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="reviews_container">
+
+                {% for i in range(user_names_review|length) %}
+                <div class="reviews_block">
+                    <h5 style="color: #919191; display: inline;">reviewed by {{user_names_review[i]}}</h5>
+                    <h4 style="color: white;text-align:center;">{{review_titles[i]}}</h4>
+                    <p style="color: white;">{{review_contents[i]}}</p>
+                </div>
+                {% endfor %}
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    </div>
+
+</body>
+</html>

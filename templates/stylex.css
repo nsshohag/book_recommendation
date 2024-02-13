@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.container{
+    margin: 0;
+    padding: 0;
+    background-color: #ffe400;
+}
+
+.rating input{
+    display: none;
+}
+.rating div{
+    background-color: #ffe400;
+}
+
+.rating input + label{
+    text-shadow: 1px 1px 0 #ffe400;
+    cursor: pointer;
+}
+.rating input:checked + label ~ label{
+    color: #838383;
+}
+.rating label:active{
+    transform: scale(0.8);
+    transition: 0.3s ease;
+}

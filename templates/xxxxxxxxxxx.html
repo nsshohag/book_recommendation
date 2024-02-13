@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>
+
+    </title>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style_book.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+</head>
+
+<body style="background-color: black;">
+    <nav class="navbar bg-nav">
+        <a class='navbar-brand' style="color:white;"> My Book Recommender</a>
+        <ul class="nav navbar-nav">
+            <li><a href="/home" style="color:grey;">Home</a></li>
+            <li><a href="/recommend" style="color:grey;">Recommend</a></li>
+            <li><a href="/all_books" style="color:grey;">Books</a></li>
+            <li><a href="/read_list" style="color:grey;">ReadList</a></li>
+            <li><a class="" href="">{{username}}</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <div>
+        <div class="grid-container">
+
+            <div class="item-1">
+                <div class="box_container">
+                    <div class="card">
+                        <img class="card-img-top" src={{book_image}}>
+
+                    </div>
+                    <button class="download_button text_color_white">Download</button>
+
+                </div>
+            </div>
+
+            <div class="item-2">
+                <h2 class="text_color_white">{{book_name}}</h2>
+                <h3 class="text_color_white">{{book_author}}</h3>
+                <h3 class="text_color_white">Votes - 428</h3>
+                <h3 class="text_color_white">Rating - 5.85</h3>
+            </div>
+
+            <div class="item-3">
+                <h4 style="color: white;">Simillar Books</h4>
+                <div style="width: 300px;height: 300px;" class="grid-3">
+                    <div class="card_rec" style="background-color: aqua;"><img class="card-img-top"
+                            src="http://images.amazon.com/images/P/0439136350.01.MZZZZZZZ.jpg"></div>
+                    <div class="card_rec" style="background-color: aqua;"><img class="card-img-top"
+                            src="http://images.amazon.com/images/P/0439136350.01.MZZZZZZZ.jpg"></div>
+                    <div class="card_rec" style="background-color: aqua;"><img class="card-img-top"
+                            src="http://images.amazon.com/images/P/0439136350.01.MZZZZZZZ.jpg"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <br>
+
+    <div class="grid-comment-review">
+
+        <div class="comments">
+            <h4>Comments:</h4>
+
+            <div style="margin-left: 10%;margin-bottom: 10px;">
+                <input class="comment_input" type="text" placeholder="comment now"
+                    style="height: 40px;border-radius: 5px; background-color: black; color: white; width: 70%;">
+                <button type="" style="background-color: green;height: 40px; border-radius: 5px;">Comment</button>
+            </div>
+
+            <div class="comments_container">
+                <div class="comments_block">
+                    <h5 style="color: #919191; display: inline;">sadat</h5>
+                    <p style="color: white;">This is an outstanding movie</p>
+                </div>
+                <div class="comments_block">
+                    <h5 style="color: #919191; display: inline;">sadat</h5>
+                    <p style="color: white;">This is an outstanding movie</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="reviews">
+
+            <h4 style="color: white;margin-left: 10%;">Reviews:</h4>
+
+            <form>
+                <div>
+                    <div style="margin-left: 10%;margin-bottom: 10px;">
+                        <label for message>Review: &nbsp;</label>
+                        <br>
+                        <textarea placeholder="Share your review about the book" cols="40" rows="10"
+                            style="background-color: #171717; color: white;"></textarea>
+                        <br>
+                        <button type="submit"
+                            style="background-color: green;height: 40px; border-radius: 5px;">Submit</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="reviews_container">
+
+                <div class="reviews_block">
+                    <h5 style="color: #919191; display: inline;">sadat</h5>
+                    <p style="color: white;">This is an outstanding movie</p>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    </div>
+
+</body>
+
+</html>
