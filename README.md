@@ -1,5 +1,6 @@
 # Book Recommendation System Using Machine Learning
 ## Project Submitted By : Nazmus Sadat Shohag
+<br>
 #### I have built a book recommendation system where people can
  - Search Books
  - Get Recommendation for Books 
@@ -7,10 +8,12 @@
  - Download Books (pdf)
  - Login and Signup
  - Get Top Trending Books
+ - Store Users' Inormations in Database
 ##  Technologies :
  - Flask (Backend)
  - HTML, CSS, JavaScript
  - Pretrained ML Models for recommendation (loaded as .pkl), Python
+ - MySql (Database)
 
 ## Dataset :
 [Kaggle: Books Dataset that was used to train the model.](https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset)
@@ -20,6 +23,7 @@
 
 - [python3](https://www.python.org/downloads/release/python-380/)
 - flask
+- mysql
 <br>
 
 Clone this repository and run the project in pycharm for ease of use. 
