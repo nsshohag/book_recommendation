@@ -1,4 +1,4 @@
-<center># Book Recommendation System Using Machine Learning</center>
+# Book Recommendation System Using Machine Learning
 ## Project Submitted By : Nazmus Sadat Shohag
 #### I have built a book recommendation system where people can
  - Search Books
